@@ -10,7 +10,7 @@ public class Polynomial {
 	 * Constructs a Polynomial with no terms yet.
 	 */
 	public Polynomial() {
-		//FIXME
+		list = new LinkedList<Double>();
 	}
 
 	
@@ -20,7 +20,7 @@ public class Polynomial {
 	 * @return polynomial with added term
 	 */
 	public void addTerm(double coeff) {
-		//FIXME
+		list.add(coeff);
 	}
 	
 	/*
@@ -29,7 +29,18 @@ public class Polynomial {
 	 * Cx^N + Cx^N-1 + ... + Cx + C
 	 */
 	public String toString() {
-		return ""; //FIXME
+		int n = list.size();
+		String poly = "";
+		for (int i = 0; i<n; i++) {
+			poly += list.get(i);
+			if (n-i-1 != 0) {
+				poly +=  "x^" + (n-i-1);
+			}
+			if (i != n-1) {
+				poly += " + ";
+			}
+		}
+		return poly;
 	}
 	
 	/**
@@ -38,12 +49,36 @@ public class Polynomial {
 	 * @return value of polynomial at that x
 	 */
 	public double evaluate(double x) {
-		return 0;//FIXME
+		int n = list.size();
+		double result = 0;
+		for (int i = 0; i<n; i++) {
+			result += (list.get(i)*(Math.pow(x, (n-i-1))));
+		}
+		return result;
 	}
 
 	
 	public Polynomial derivative() {
-		return null;//FIXME
+		int n = list.size();
+		Polynomial deriv = new Polynomial();
+		for(int i = 0; i<n-1 ; i++) {
+			deriv.addTerm((list.get(i)*(n-i-1)));
+		}
+		return deriv;
+		
+		
+//		int n = list.size();
+//		String poly = "";
+//		for (int i = 0; i<n; i++) {
+//			poly += list.get(i)*(n-i-1);
+//			if (n-i-1 != 0) {
+//				poly +=  "x^" + (n-i-2);
+//			}
+//			if (i != n-1) {
+//				poly += " + ";
+//			}
+//		}
+//		return poly;
 	}
 	
 
